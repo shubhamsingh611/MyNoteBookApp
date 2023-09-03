@@ -11,9 +11,9 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Notes App"
+        android:text="@string/notes_app"
         android:textColor="@color/white"
-        android:textSize="30sp"
+        android:textSize="@dimen/dimen_30sp"
         app:layout_constraintBottom_toTopOf="@+id/imageView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,13 +22,13 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginBottom="292dp"
+        android:layout_width="@dimen/dimen_100dp"
+        android:layout_height="@dimen/dimen_100dp"
         android:background="@drawable/ic_logo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/textView"
         app:layout_constraintHorizontal_bias="0.487"
-        app:layout_constraintStart_toStartOf="@+id/textView" />
+        app:layout_constraintStart_toStartOf="@+id/textView"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

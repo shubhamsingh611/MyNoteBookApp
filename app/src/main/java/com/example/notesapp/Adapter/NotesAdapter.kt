@@ -9,19 +9,17 @@ import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.notesapp.Models.Note
 import com.example.notesapp.R
-import org.w3c.dom.NodeList
 import kotlin.random.Random
 
-class NotesAdapter(private val context : Context, val listener: NotesClickListener) : RecyclerView.Adapter<NotesAdapter.NoteViewHolder>(){
+class NotesAdapter(private val context: Context, val listener: NotesClickListener) :
+    RecyclerView.Adapter<NotesAdapter.NoteViewHolder>() {
 
     private val NotesList = ArrayList<Note>()
     private val fullList = ArrayList<Note>()
 
-
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NoteViewHolder {
         return NoteViewHolder(
-            LayoutInflater.from(context).inflate(R.layout.list_item,parent,false)
+            LayoutInflater.from(context).inflate(R.layout.list_item, parent, false)
         )
     }
 
@@ -32,43 +30,41 @@ class NotesAdapter(private val context : Context, val listener: NotesClickListen
         holder.Note_tv.text = currentNote.note
         holder.date.text = currentNote.date
         holder.date.isSelected = true
-        holder.notes_layout.setCardBackgroundColor(holder.itemView.resources.getColor(randomColor(), null))
+        holder.notes_layout.setCardBackgroundColor(
+            holder.itemView.resources.getColor(
+                randomColor(),
+                null
+            )
+        )
 
-        holder.notes_layout.setOnClickListener{
+        holder.notes_layout.setOnClickListener {
             listener.onItemClicked(NotesList[holder.adapterPosition])
         }
 
-        holder.notes_layout.setOnLongClickListener{
+        holder.notes_layout.setOnLongClickListener {
             listener.onLongItemClicked(NotesList[holder.adapterPosition], holder.notes_layout)
             true
         }
 
     }
 
-    fun updateList(newList : List<Note>){
-
+    fun updateList(newList: List<Note>) {
         fullList.clear()
         fullList.addAll(newList)
-
         NotesList.clear()
         NotesList.addAll(fullList)
         notifyDataSetChanged()
-
     }
 
-    fun filterList(search : String){
+    fun filterList(search: String) {
         NotesList.clear()
-
-        for(item in fullList){
-
-            if(item.title?.lowercase()?.contains(search.lowercase())==true ||
-                item.note?.lowercase()?.contains(search.lowercase())==true){
-
+        for (item in fullList) {
+            if (item.title?.lowercase()?.contains(search.lowercase()) == true ||
+                item.note?.lowercase()?.contains(search.lowercase()) == true
+            ) {
                 NotesList.add(item)
-
             }
         }
-
         notifyDataSetChanged()
     }
 
@@ -76,8 +72,7 @@ class NotesAdapter(private val context : Context, val listener: NotesClickListen
         return NotesList.size
     }
 
-    fun randomColor() : Int {
-
+    fun randomColor(): Int {
         val list = ArrayList<Int>()
         list.add(R.color.NoteColor1)
         list.add(R.color.NoteColor2)
@@ -85,27 +80,21 @@ class NotesAdapter(private val context : Context, val listener: NotesClickListen
         list.add(R.color.NoteColor4)
         list.add(R.color.NoteColor5)
         list.add(R.color.NoteColor6)
-
         val seed = System.currentTimeMillis().toInt()
         val randomIndex = Random(seed).nextInt(list.size)
         return list[randomIndex]
-
     }
 
-    inner class NoteViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView){
-
+    inner class NoteViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val notes_layout = itemView.findViewById<CardView>(R.id.card_layout)
         val title = itemView.findViewById<TextView>(R.id.tv_title)
         val Note_tv = itemView.findViewById<TextView>(R.id.tv_note)
         val date = itemView.findViewById<TextView>(R.id.tv_date)
-
-
     }
 
-    interface NotesClickListener{
-
-        fun onItemClicked(note:Note)
-        fun onLongItemClicked(note:Note,cardView: CardView)
+    interface NotesClickListener {
+        fun onItemClicked(note: Note)
+        fun onLongItemClicked(note: Note, cardView: CardView)
     }
 
 }
