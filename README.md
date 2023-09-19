@@ -21,7 +21,7 @@ This app fetches the daily image published by NASA and it's details from NASA Ap
 ## Deployment
 1. Used Retrofit Library for API call request.
 2. Stored the response received by successful API call in Shared Preferences.
-3. Fetchch the cached data and display it on UI.
+3. Fetched the cached data and display it on UI.
 4. Used Glide library for loading image from URL.
 5. Followed MVVM Architecture for project structuring.
 
